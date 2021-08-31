@@ -1,12 +1,15 @@
-Collection extension for chromium based browser.
+# Collection extension for chromium based browser.
 
 Unable to pusblish in store because it costs.
+
+Try demo(most functions doest work)
+[https://pensive-lumiere-f0d34a.netlify.app/](https://pensive-lumiere-f0d34a.netlify.app/)
 
 If you want to try, download `/build` or `build.zip` from releases, open extension option in your browser, enable developer mode, load unpacked and select `/build`. You can turn off developer mode now.
 
 ---
 
-#Demo Image
+## Demo Image
 
 ![Demo Image](assets/1.jpg)
 ![Demo Image](assets/2.jpg)
