@@ -260,7 +260,7 @@ body {
                     display: flex;
                     padding: 0 5px;
                     align-items: center;
-                    height: 100%;
+                    height: 40px;
                     flex-direction: row;
                     border-radius: 2px;
                     background-color: var(--color-overlay4);
@@ -274,7 +274,7 @@ body {
                 }
                 .createNew {
                     width: 100%;
-                    height: 100%;
+                    height: 40px;
                     display: flex;
                     align-self: stretch;
                     justify-self: stretch;
@@ -402,10 +402,12 @@ body {
                 padding: 10px;
                 border-radius: 2px;
                 .msg {
+                    text-align: center;
                 }
                 .option {
                     display: flex;
                     flex-direction: row;
+                    margin-top: 10px;
                     .warn {
                         &:hover {
                             color: var(--color-on-error);

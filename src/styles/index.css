@@ -371,7 +371,7 @@ body #app #main .collectionOptions .deleteSelected {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 100%;
+  height: 40px;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -396,7 +396,7 @@ body #app #main .collectionOptions .deleteSelected .options {
 
 body #app #main .collectionOptions .createNew {
   width: 100%;
-  height: 100%;
+  height: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -587,6 +587,10 @@ body #app .promptConfirmCont .prompt {
   border-radius: 2px;
 }
 
+body #app .promptConfirmCont .prompt .msg {
+  text-align: center;
+}
+
 body #app .promptConfirmCont .prompt .option {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -595,6 +599,7 @@ body #app .promptConfirmCont .prompt .option {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  margin-top: 10px;
 }
 
 body #app .promptConfirmCont .prompt .option .warn:hover {

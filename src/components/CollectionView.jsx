@@ -107,6 +107,21 @@ const CollectionView = ({
         let imgUrl = metaImgTag ? metaImgTag.getAttribute("content") : "";
         return imgUrl;
     };
+    const openLink = (type, link) => {
+        if (!isDragging && canOpenCollection) {
+            if (type === "sameTab") {
+                /* eslint-disable */
+                chrome.tabs.update({ url: link });
+                /* eslint-enable */
+            }
+            if (type === "newTab") {
+                /* eslint-disable */
+                e.preventDefault();
+                chrome.tabs.create({ url: link, active: false });
+                /* eslint-enable */
+            }
+        }
+    };
     const addLink = (which, e) => {
         if (which === "current") {
             //eslint-disable-next-line
@@ -163,7 +178,11 @@ const CollectionView = ({
                 e.pageX - mainContRef.current.offsetLeft + 20 + "px";
         }
         nameElem.style.top =
-            e.pageY - mainContRef.current.offsetTop + 20 + "px";
+            e.pageY -
+            mainContRef.current.offsetTop +
+            mainContRef.current.scrollTop +
+            -40 +
+            "px";
         const lineElem = dragIndicatorRef.current.querySelector(".line");
         lineElem.style.top =
             collectionViewRef.current.offsetTop +
@@ -198,7 +217,11 @@ const CollectionView = ({
                 e.pageX - mainContRef.current.offsetLeft + 20 + "px";
         }
         nameElem.style.top =
-            e.pageY - mainContRef.current.offsetTop + 20 + "px";
+            e.pageY -
+            mainContRef.current.offsetTop +
+            mainContRef.current.scrollTop +
+            -40 +
+            "px";
         const lineElem = dragIndicatorRef.current.querySelector(".line");
         const elemUnderMouse = document.elementFromPoint(e.pageX, e.pageY);
         let index = draggingOverIndex;
@@ -399,11 +422,27 @@ const CollectionView = ({
                                     chrome.windows.create({
                                         url: links,
                                         state: "maximized",
+                                    }); /* eslint-enable */
+                                }}
+                            >
+                                New Window
+                            </button>
+                            <button
+                                onClick={() => {
+                                    /* eslint-disable */
+                                    let links = collection.content
+                                        .filter((e, i) =>
+                                            selectedLink.includes(i)
+                                        )
+                                        .map((e) => e.href);
+                                    chrome.windows.create({
+                                        url: links,
+                                        state: "maximized",
                                         incognito: true,
                                     }); /* eslint-enable */
                                 }}
                             >
-                                Open Incognito
+                                Incognito
                             </button>
                             <button
                                 onClick={() => {
@@ -447,13 +486,27 @@ const CollectionView = ({
                     >
                         <button
                             className="addCurrentLink"
-                            onClick={() => addLink("current")}
+                            onClick={() => {
+                                addLink("current");
+                                setTimeout(() => {
+                                    collectionViewRef.current.lastElementChild.scrollIntoView(
+                                        {
+                                            block: "end",
+                                        }
+                                    );
+                                }, 100);
+                            }}
                         >
                             Add Current Tab
                         </button>
                         <button
                             className="addCurrentLink"
-                            onClick={() => addLink("all")}
+                            onClick={() => {
+                                addLink("all");
+                                setTimeout(() => {
+                                    collectionViewRef.current.lastElementChild.scrollIntoView();
+                                }, 100);
+                            }}
                         >
                             Add All opened Tabs
                         </button>
@@ -485,6 +538,7 @@ const CollectionView = ({
                                 removeFromSelected={removeFromSelected}
                                 filterMeta={filterMeta}
                                 onLinkDrag={linkDrag}
+                                openLink={openLink}
                             />
                         ))
                     )}

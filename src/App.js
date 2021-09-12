@@ -83,7 +83,7 @@ const App = () => {
             cover: cover || "",
             href: link,
         };
-        data[colIndex].content.unshift(newContentItem);
+        data[colIndex].content.push(newContentItem);
         dataUpdater([...data]);
     };
     const removeCollections = (indexes) => {

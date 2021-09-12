@@ -136,7 +136,11 @@ const Collections = ({
                 e.pageX - mainContRef.current.offsetLeft + 20 + "px";
         }
         nameElem.style.top =
-            e.pageY - mainContRef.current.offsetTop + 20 + "px";
+            e.pageY -
+            mainContRef.current.offsetTop +
+            mainContRef.current.scrollTop +
+            -40 +
+            "px";
         const lineElem = dragIndicatorRef.current.querySelector(".line");
         lineElem.style.top =
             collectionRef.current.offsetTop +
@@ -171,7 +175,11 @@ const Collections = ({
                 e.pageX - mainContRef.current.offsetLeft + 20 + "px";
         }
         nameElem.style.top =
-            e.pageY - mainContRef.current.offsetTop + 20 + "px";
+            e.pageY -
+            mainContRef.current.offsetTop +
+            mainContRef.current.scrollTop +
+            -40 +
+            "px";
         const lineElem = dragIndicatorRef.current.querySelector(".line");
         const elemUnderMouse = document.elementFromPoint(e.pageX, e.pageY);
         let index = draggingOverIndex;
@@ -330,12 +338,8 @@ const Collections = ({
                         <span className="options">
                             <button
                                 onClick={() => {
-                                    // removeCollections(selectedCollection);
-                                    // deSelectAll();
                                     promptConfirm(
-                                        "Are you sure you want to delete " +
-                                            selectedCollection.length +
-                                            " collections",
+                                        "Are you sure you want to delete selected collections",
                                         () => {
                                             removeCollections(
                                                 selectedCollection
@@ -400,7 +404,7 @@ const Collections = ({
                     }}
                     onMouseLeave={(e) => {
                         if (isDragging && draggingIndex !== null) {
-                            cancelDrag();
+                            collectionDragEnd(e);
                         }
                     }}
                 >

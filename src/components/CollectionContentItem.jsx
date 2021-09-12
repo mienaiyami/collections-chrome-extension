@@ -12,6 +12,7 @@ const CollectionContentItem = ({
     indexNumber,
     filterMeta,
     onLinkDrag,
+    openLink,
 }) => {
     const checkboxRef = useRef(null);
     const [checkboxState, checkboxStateUpdater] = useState(false);
@@ -51,16 +52,11 @@ const CollectionContentItem = ({
             data-index={indexNumber}
             data-checked={checkboxState}
             onClick={() => {
-                /* eslint-disable */
-                chrome.tabs.update({ url: href });
-                /* eslint-enable */
+                openLink("sameTab", href);
             }}
-            onMouseDown={(e) => {
+            onMouseUp={(e) => {
                 if (e.button === 1) {
-                    /* eslint-disable */
-                    e.preventDefault();
-                    chrome.tabs.create({ url: href, active: false });
-                    /* eslint-enable */
+                    openLink("newTab", href);
                 }
             }}
             onContextMenu={(e) => {
