@@ -51,11 +51,21 @@ const CollectionContentItem = ({
             tabIndex="0"
             data-index={indexNumber}
             data-checked={checkboxState}
-            onClick={() => {
+            onClick={(e) => {
+                e.preventDefault();
+                if (e.ctrlKey) return openLink("newTab", href);
                 openLink("sameTab", href);
+            }}
+            onMouseDown={(e) => {
+                if (e.button === 1) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
             }}
             onMouseUp={(e) => {
                 if (e.button === 1) {
+                    e.preventDefault();
+                    e.stopPropagation();
                     openLink("newTab", href);
                 }
             }}

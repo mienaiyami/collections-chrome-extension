@@ -116,7 +116,6 @@ const CollectionView = ({
             }
             if (type === "newTab") {
                 /* eslint-disable */
-                e.preventDefault();
                 chrome.tabs.create({ url: link, active: false });
                 /* eslint-enable */
             }
@@ -343,6 +342,7 @@ const CollectionView = ({
                                     url: collection.content[
                                         contextMenuSelectedIndex
                                     ].href,
+                                    active: false,
                                 }); /* eslint-enable */
                         }}
                     >
