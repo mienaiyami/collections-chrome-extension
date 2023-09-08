@@ -1,3 +1,7 @@
+# ❗❗ Not recommended for use anymore
+
+Use <https://github.com/mienaiyami/collection-extension-2.0>, if possible get it from store url for auto updates. 
+
 # Collection extension for chromium based browser.
 
 Unable to pusblish in store because it costs.
